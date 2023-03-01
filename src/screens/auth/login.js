@@ -66,7 +66,7 @@ export default function Login() {
       </View>
       <View className="bg-purple-200 basis-full ">
         <Text className="font-extrabold  text-6xl text-pink-500 bg-purple-300">
-          ReferHer
+          Refer-Her
         </Text>
         <View className="flex-row justify-center ">
           <Controller

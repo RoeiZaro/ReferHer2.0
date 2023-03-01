@@ -36,7 +36,7 @@ export default function LandingPage() {
             onPress={() => navigation.navigate("Register")}
           >
             <Text className="text-white justify-center text-base font-bold">
-              Register
+              Register now
             </Text>
           </TouchableOpacity>
         </View>
