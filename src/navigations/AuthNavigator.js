@@ -16,7 +16,7 @@ function AuthNavigator() {
 
   return (
     <>
-      {!user ? (
+      {user ? (
         <Stack.Navigator screenOptions={{}} initialRouteName={"LandingPage"}>
           <Stack.Screen
             name={"LandingPage"}
@@ -31,13 +31,7 @@ function AuthNavigator() {
           <Stack.Screen
             name={"Register"}
             component={Register}
-            options={({ route }) => ({
-              headerTintColor: COLORS.white,
-              headerBackTitle: "Back",
-              headerStyle: {
-                backgroundColor: COLORS.primary,
-              },
-            })}
+            options={{ headerShown: false }}
           />
         </Stack.Navigator>
       ) : (
