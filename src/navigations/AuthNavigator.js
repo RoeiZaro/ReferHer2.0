@@ -16,7 +16,7 @@ function AuthNavigator() {
 
   return (
     <>
-      {!user ? (
+      {user ? (
         <Stack.Navigator screenOptions={{}} initialRouteName={"LandingPage"}>
           <Stack.Screen
             name={"LandingPage"}
@@ -28,6 +28,7 @@ function AuthNavigator() {
             component={Login}
             options={{ headerShown: false }}
           />
+
           <Stack.Screen
             name={"Register"}
             component={Register}
