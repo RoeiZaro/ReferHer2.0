@@ -10,13 +10,13 @@ import MyTabs from "./HomeTabs";
 
 function AuthNavigator() {
   const Stack = createNativeStackNavigator();
-  const { user } = useContext(UserContext);
+  const { token } = useContext(UserContext);
 
   const navigation = useNavigation();
 
   return (
     <>
-      {user ? (
+      {!token ? (
         <Stack.Navigator screenOptions={{}} initialRouteName={"LandingPage"}>
           <Stack.Screen
             name={"LandingPage"}

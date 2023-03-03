@@ -1,12 +1,10 @@
 import {
   View,
   Text,
-  Button,
   TextInput,
-  Alert,
   TouchableOpacity,
 } from "react-native";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { UserContext } from "../../context/userContext";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -16,59 +14,42 @@ import { useAsyncStorage } from "@react-native-async-storage/async-storage";
 import axios from "axios";
 
 export default function Login() {
-  const { user, setUser, setToken } = useContext(UserContext);
-  const navigation = useNavigation();
-  const { setItem } = useAsyncStorage("token");
-
-  const writeItemToStorage = async (newValue) => {
-    await setItem(newValue);
-    setToken(newValue);
-  };
+  const { authenticate } = useContext(UserContext);
+  const [authRes, setAuthRes] = useState(null);
+  
   const {
     control,
     handleSubmit,
     formState: { errors },
   } = useForm({
     defaultValues: {
-      email: "",
+      username: "",
       password: "",
     },
   });
 
-  const login = async ({ email, password }) => {
-    try {
-      const res = await axios.post("http://192.168.34.8:3000/login", {
-        email,
-        password,
-      });
-      if (res.status === 201) {
-        alert("user not found");
-      }
-      if (res.status === 200) {
-        await writeItemToStorage(res.data.token);
-        setData(res.data.user);
-        setTimeout(() => {
-          navigation.goBack();
-        }, 900);
-      }
-    } catch (err) {
-      console.log(err);
-    }
+  const onSubmit = (data) => {
+    const { username, password } = data;
+    setAuthRes(authenticate(username, password));
   };
 
-  const onSubmit = (data) => {
-    login(data);
-  };
   return (
-    <SafeAreaView>
-      <View>
+    <>
+     <View>
         <Statusbarr style="dark" />
       </View>
-      <View className="bg-purple-200 basis-full ">
-        <Text className="font-extrabold  text-6xl text-pink-500 bg-purple-300">
-          Refer-Her
+      <View className=" bg-pink-300 flex min-h-full w-full flex-col justify-center py-12">
+      <View className="">
+        <Text className="mt-6 text-center text-xl font-bold tracking-tight text-gray-900">
+          Refer-her
         </Text>
-        <View className="flex-row justify-center ">
+      </View>
+
+      <View className="mt-8">
+        <View className="bg-purple-200 py-8 px-4 shadow rounded-lg mx-5">
+          <View>
+            <Text className="block text-sm font-bold text-gray-500">Email Address or Username</Text>
+            <View className=" justify-center ">
           <Controller
             control={control}
             rules={{
@@ -76,43 +57,50 @@ export default function Login() {
             }}
             render={({ field: { onChange, onBlur, value } }) => (
               <TextInput
-                className="bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/12 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              className="block w-full appearance-none rounded-md border border-gray-300 px-4 py-3 placeholder-pink-400 shadow-sm focus:border-pink-500 focus:outline-none focus:ring-yellow-500"
                 onBlur={onBlur}
                 onChangeText={onChange}
                 value={value}
-                placeholder="email"
               />
             )}
-            name="email"
+            name="username"
           />
-          {errors.email && <Text>This is required.</Text>}
+          {errors.username && <Text>This is required.</Text>}
+          </View>
 
-          <Controller
+          <View className="mt-5">
+            <Text className="block text-sm font-bold text-gray-500">Password</Text>
+            <View className="mt-2">
+            <Controller
             control={control}
             rules={{
               maxLength: 100,
             }}
             render={({ field: { onChange, onBlur, value } }) => (
               <TextInput
-                className="bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-4/12 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              className="block w-full appearance-none rounded-md border border-gray-300 px-4 py-3 placeholder-pink-400 shadow-sm focus:border-pink-500 focus:outline-none focus:ring-yellow-500"
                 onBlur={onBlur}
                 onChangeText={onChange}
                 value={value}
-                placeholder="password"
                 secureTextEntry={true}
               />
             )}
             name="password"
           />
           {errors.password && <Text>This is required.</Text>}
-          <TouchableOpacity
-            className="text-white bg-purple-900  mt-2 justify-center font-medium rounded-lg text-base w-20 h-7  align-content: center items-center "
-            onPress={handleSubmit(onSubmit)}
-          >
-            <Text className="text-white">Submit</Text>
-          </TouchableOpacity>
+            </View>
+          </View>
+
+          <View className="mt-5">
+            <TouchableOpacity onPress={handleSubmit(onSubmit)}
+              className="flex w-full justify-center rounded-md border border-transparent bg-blue-600 p-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+              <Text className="text-center text-white">Sign in</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
-    </SafeAreaView>
+    </View>
+      </View>
+    </>
   );
 }

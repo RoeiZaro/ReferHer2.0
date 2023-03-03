@@ -3,8 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import AuthNavigator from "./src/navigations/AuthNavigator";
 import UserProvider from "./src/context/userContext";
 import SplashScreen from "./src/screens/auth/splashScreen";
-import { SafeAreaView, Text, View } from "react-native";
-import { StatusBar as Statusbarr } from "expo-status-bar";
+
 // import { useFonts } from 'expo-font';
 
 export default function App() {

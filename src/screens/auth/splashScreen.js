@@ -40,9 +40,14 @@ const styles = StyleSheet.create({
   },
   logo: {
     flex: 1,
+    alignSelf: "center",
+    width: "100%",
+    height: "100%",
+    
   },
   video: {
     flex: 1,
     alignSelf: "stretch",
   },
 });
+

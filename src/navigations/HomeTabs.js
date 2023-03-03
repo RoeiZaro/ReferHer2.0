@@ -5,9 +5,11 @@ import { StatusBar } from "expo-status-bar";
 
 import { UserContext } from "../context/userContext";
 import { useContext } from "react";
-import { Text, View } from "react-native";
+import { Text, View, Button } from "react-native";
 
 function Main() {
+  const { removeItem } = useContext(UserContext);
+
   return (
     <>
       <SafeAreaView className="bg-pink-600 justify-center">
@@ -15,6 +17,7 @@ function Main() {
       </SafeAreaView>
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
         <Text>Your Notifications is empty!</Text>
+        <Button title="lol" onPress={() => removeItem()} />
       </View>
     </>
   );

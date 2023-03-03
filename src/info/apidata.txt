@@ -1,0 +1,148 @@
+{post}=> "https://referher.co/wp-json/wp/v2/users/me" + {Token}=>  {
+    "id": 413,
+    "username": "referherapp",
+    "name": "Or Farber",
+    "first_name": "Orr",
+    "last_name": "Farber",
+    "email": "referherapp1@gmail.com",
+    "url": "",
+    "description": "",
+    "link": "https://referher.co/author/referherapp/",
+    "locale": "en_US",
+    "nickname": "referherapp",
+    "slug": "referherapp",
+    "roles": [
+        "subscriber",
+        "administrator"
+    ],
+    "registered_date": "2023-03-01T12:40:00+00:00",
+    "capabilities": {
+        "read": true,
+        "level_0": true,
+        "switch_themes": true,
+        "edit_themes": true,
+        "activate_plugins": true,
+        "edit_plugins": true,
+        "edit_users": true,
+        "edit_files": true,
+        "manage_options": true,
+        "moderate_comments": true,
+        "manage_categories": true,
+        "manage_links": true,
+        "upload_files": true,
+        "import": true,
+        "unfiltered_html": true,
+        "edit_posts": true,
+        "edit_others_posts": true,
+        "edit_published_posts": true,
+        "publish_posts": true,
+        "edit_pages": true,
+        "level_10": true,
+        "level_9": true,
+        "level_8": true,
+        "level_7": true,
+        "level_6": true,
+        "level_5": true,
+        "level_4": true,
+        "level_3": true,
+        "level_2": true,
+        "level_1": true,
+        "edit_others_pages": true,
+        "edit_published_pages": true,
+        "publish_pages": true,
+        "delete_pages": true,
+        "delete_others_pages": true,
+        "delete_published_pages": true,
+        "delete_posts": true,
+        "delete_others_posts": true,
+        "delete_published_posts": true,
+        "delete_private_posts": true,
+        "edit_private_posts": true,
+        "read_private_posts": true,
+        "delete_private_pages": true,
+        "edit_private_pages": true,
+        "read_private_pages": true,
+        "delete_users": true,
+        "create_users": true,
+        "unfiltered_upload": true,
+        "edit_dashboard": true,
+        "update_plugins": true,
+        "delete_plugins": true,
+        "install_plugins": true,
+        "update_themes": true,
+        "install_themes": true,
+        "update_core": true,
+        "list_users": true,
+        "remove_users": true,
+        "promote_users": true,
+        "edit_theme_options": true,
+        "delete_themes": true,
+        "export": true,
+        "wpcode_edit_snippets": true,
+        "wpcode_activate_snippets": true,
+        "ure_edit_roles": true,
+        "ure_create_roles": true,
+        "ure_delete_roles": true,
+        "ure_create_capabilities": true,
+        "ure_delete_capabilities": true,
+        "ure_manage_options": true,
+        "ure_reset_roles": true,
+        "edit_wpforms_forms": true,
+        "edit_others_wpforms_forms": true,
+        "publish_wpforms_forms": true,
+        "read_private_wpforms_forms": true,
+        "delete_wpforms_forms": true,
+        "create_posts": true,
+        "install_languages": true,
+        "resume_plugins": true,
+        "resume_themes": true,
+        "view_site_health_checks": true,
+        "objectcache_manage": true,
+        "view_burst_statistics": true,
+        "manage_burst_statistics": true,
+        "sue_send_email_capability": true,
+        "users_insights_list_users": true,
+        "users_insights_update_user_profile": true,
+        "users_insights_manage_groups": true,
+        "users_insights_manage_custom_fields": true,
+        "users_insights_manage_options": true,
+        "users_insights_manage_segments": true,
+        "users_insights_export_users": true,
+        "users_insights_view_reports": true,
+        "subscriber": true,
+        "administrator": true
+    },
+    "extra_capabilities": {
+        "subscriber": true,
+        "administrator": true
+    },
+    "avatar_urls": {
+        "24": "https://secure.gravatar.com/avatar/542db8604d26a47a90ee888577772707?s=24&d=mm&r=g",
+        "48": "https://secure.gravatar.com/avatar/542db8604d26a47a90ee888577772707?s=48&d=mm&r=g",
+        "96": "https://secure.gravatar.com/avatar/542db8604d26a47a90ee888577772707?s=96&d=mm&r=g"
+    },
+    "meta": {
+        "persisted_preferences": {
+            "core/edit-post": {
+                "isComplementaryAreaVisible": false,
+                "welcomeGuide": false
+            },
+            "_modified": "2023-03-03T09:17:38.347Z"
+        }
+    },
+    "acf": [],
+    "_links": {
+        "self": [
+            {
+                "href": "https://referher.co/wp-json/wp/v2/users/413"
+            }
+        ],
+        "collection": [
+            {
+                "href": "https://referher.co/wp-json/wp/v2/users"
+            }
+        ]
+    }
+}
+
+
