@@ -18,7 +18,7 @@ export default function App() {
     endIntro();
   }, []);
   async function endIntro() {
-    await sleep(4000);
+    await sleep(2000);
 
     setIntro(false);
   }

@@ -5,32 +5,24 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { useContext, useState } from "react";
-import { useNavigation } from "@react-navigation/native";
 import { UserContext } from "../../context/userContext";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { StatusBar as Statusbarr } from "expo-status-bar";
 import { useForm, Controller } from "react-hook-form";
-import { useAsyncStorage } from "@react-native-async-storage/async-storage";
-import axios from "axios";
 
 export default function Login() {
   const { authenticate } = useContext(UserContext);
   const [authRes, setAuthRes] = useState(null);
-  
-  const {
-    control,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    defaultValues: {
-      username: "",
-      password: "",
-    },
-  });
+ 
+  const {control,handleSubmit,formState: { errors }} = useForm({defaultValues: {username: "",password: ""}});
+
 
   const onSubmit = (data) => {
     const { username, password } = data;
-    setAuthRes(authenticate(username, password));
+
+    authenticate(username, password)
+    .then(result => setAuthRes(result))
+    .catch(error => console.error(error));
   };
 
   return (
@@ -40,7 +32,7 @@ export default function Login() {
       </View>
       <View className=" bg-pink-300 flex min-h-full w-full flex-col justify-center py-12">
       <View className="">
-        <Text className="mt-6 text-center text-xl font-bold tracking-tight text-gray-900">
+        <Text className="mt-6 text-center text-xl font-bold tracking-tight text-gray-800">
           Refer-her
         </Text>
       </View>
@@ -93,7 +85,7 @@ export default function Login() {
 
           <View className="mt-5">
             <TouchableOpacity onPress={handleSubmit(onSubmit)}
-              className="flex w-full justify-center rounded-md border border-transparent bg-blue-600 p-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+              className="flex w-full justify-center rounded-md border border-transparent bg-pink-600 p-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
               <Text className="text-center text-white">Sign in</Text>
             </TouchableOpacity>
           </View>

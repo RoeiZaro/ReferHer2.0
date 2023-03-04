@@ -12,8 +12,6 @@ function AuthNavigator() {
   const Stack = createNativeStackNavigator();
   const { token } = useContext(UserContext);
 
-  const navigation = useNavigation();
-
   return (
     <>
       {!token ? (

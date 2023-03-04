@@ -7,21 +7,8 @@ import { UserContext } from "../context/userContext";
 import { useContext } from "react";
 import { Text, View, Button } from "react-native";
 
-function Main() {
-  const { removeItem } = useContext(UserContext);
-
-  return (
-    <>
-      <SafeAreaView className="bg-pink-600 justify-center">
-        <StatusBar style="light" />
-      </SafeAreaView>
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <Text>Your Notifications is empty!</Text>
-        <Button title="lol" onPress={() => removeItem()} />
-      </View>
-    </>
-  );
-}
+import HomeTab from "../screens/tabs/HomeTab";
+import ProfileTab from "../screens/tabs/ProfileTab";
 
 const Tab = createBottomTabNavigator();
 
@@ -38,7 +25,7 @@ export default function MyTabs() {
     >
       <Tab.Screen
         name="Feed"
-        component={Main}
+        component={HomeTab}
         options={{
           tabBarLabel: "Home",
           tabBarIcon: ({ color, size }) => (
@@ -49,7 +36,7 @@ export default function MyTabs() {
 
       <Tab.Screen
         name="Main"
-        component={Main}
+        component={HomeTab}
         options={{
           tabBarLabel: "Updates",
           tabBarIcon: ({ color, size }) => (
@@ -58,8 +45,19 @@ export default function MyTabs() {
         }}
       />
       <Tab.Screen
+        name="Inbox"
+        component={HomeTab}
+        options={{
+          tabBarLabel: "Inbox",
+          tabBarIcon: ({ color, size }) => (
+            <Icons.ChatBubbleBottomCenterTextIcon name="chat" color={color} size={size} />
+          ),
+        }}
+      />
+
+      <Tab.Screen
         name="Profile"
-        component={Main}
+        component={ProfileTab}
         options={{
           tabBarLabel: "Profile",
           tabBarIcon: ({ color, size }) => (
@@ -67,16 +65,7 @@ export default function MyTabs() {
           ),
         }}
       />
-      <Tab.Screen
-        name="AboutUs"
-        component={Main}
-        options={{
-          tabBarLabel: "About Us",
-          tabBarIcon: ({ color, size }) => (
-            <Icons.LightBulbIcon name="bulb" color={color} size={size} />
-          ),
-        }}
-      />
+      
     </Tab.Navigator>
   );
 }
