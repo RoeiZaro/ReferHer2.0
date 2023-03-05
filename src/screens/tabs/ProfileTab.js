@@ -1,5 +1,5 @@
-import { View, Text, Image, StatusBar, Button } from 'react-native';
-import { useContext } from 'react';
+import { View, Text, Image, StatusBar, Button, ActivityIndicator } from 'react-native';
+import { useContext, useEffect } from 'react';
 import { UserContext } from '../../context/userContext';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -15,6 +15,7 @@ export default function ProfileTab() {
   };
 
   return (
+    (userData?
     <View className="mx-auto text-center w-full">
       <SafeAreaView >
           <StatusBar backgroundColor="#8A2BE2" barStyle={'light-content'} />
@@ -59,6 +60,11 @@ export default function ProfileTab() {
           <Button title="logout" onPress={() => logout()} />
         </View>
       </View>
-    </View>
+    </View>:
+     <View className="flex-1 bg-pink-300 mx-auto text-center w-full justify-center">
+
+    <ActivityIndicator  />
+     </View>)
+    
   );
 }

@@ -26,7 +26,6 @@ const UserProvider = ({ children }) => {
       await removeItem();
       setToken(null);
     };
-
     //WARNING: This is a temporary solution, in case the user try too many times to log in with incorrect credentials the api will retrurn a html recaptcha and this will break the function in the response.json() linne 
     const authenticate = async (username, password) => {
       const body = JSON.stringify({ username, password });
@@ -53,6 +52,7 @@ const UserProvider = ({ children }) => {
         setToken(data.token);
         await writeItemToStorage(data.token);
       }
+      whoami
       return false;
     };
   
@@ -76,8 +76,18 @@ const UserProvider = ({ children }) => {
       return data;
     };
     
-    useEffect(() => {
-      async function  init(){
+    useEffect(() => { 
+      async function  fetchToUserData(token){
+        const data = await whoami(token);
+
+        if (!data) {
+          console.log('Error: Unable to fetch user data with saved token');
+          return;
+        }
+        
+        setUserData(data);
+      }
+      async function  fetchFromPhone(){
         const localInfo = await readItemFromStorage();
         if (!localInfo) {
           console.log('no token saved');
@@ -85,17 +95,12 @@ const UserProvider = ({ children }) => {
         }
 
         setToken(localInfo);
-        const data = await whoami(localInfo);
-
-        if (!data) {
-          console.log('Error: Unable to fetch user data with saved token');
-          return;
+        fetchToUserData(localInfo);
         }
-        // console.log(data.avatar_urls[48]);
-        setUserData(data);
-      }
-      init()
-    }, []);
+
+      token ? fetchToUserData(token) : fetchFromPhone()
+      
+    }, [token]);
 
   return (
     <UserContext.Provider
