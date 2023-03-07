@@ -9,6 +9,8 @@ import { Text, View, Button } from "react-native";
 
 import HomeTab from "../screens/tabs/HomeTab";
 import ProfileTab from "../screens/tabs/ProfileTab";
+import FeedTab from "../screens/tabs/PostsTab";
+import PostsTab from "../screens/tabs/PostsTab";
 
 const Tab = createBottomTabNavigator();
 
@@ -24,33 +26,38 @@ export default function MyTabs() {
       }}
     >
       <Tab.Screen
-        name="Feed"
+        name="Home"
         component={HomeTab}
         options={{
           tabBarLabel: "Home",
           tabBarIcon: ({ color, size }) => (
-            <Icons.SparklesIcon name="home" color={color} size={size} />
+            <Icons.HomeIcon name="home" color={color} size={size} />
           ),
         }}
       />
 
       <Tab.Screen
         name="Main"
-        component={HomeTab}
+        component={PostsTab}
         options={{
-          tabBarLabel: "Updates",
+          tabBarLabel: "Posts",
           tabBarIcon: ({ color, size }) => (
-            <Icons.BellIcon name="bell" color={color} size={size} />
+            <Icons.RectangleGroupIcon name="bell" color={color} size={size} />
           ),
         }}
       />
+
       <Tab.Screen
         name="Inbox"
         component={HomeTab}
         options={{
           tabBarLabel: "Inbox",
           tabBarIcon: ({ color, size }) => (
-            <Icons.ChatBubbleBottomCenterTextIcon name="chat" color={color} size={size} />
+            <Icons.ChatBubbleBottomCenterTextIcon
+              name="chat"
+              color={color}
+              size={size}
+            />
           ),
         }}
       />
@@ -65,7 +72,6 @@ export default function MyTabs() {
           ),
         }}
       />
-      
     </Tab.Navigator>
   );
 }

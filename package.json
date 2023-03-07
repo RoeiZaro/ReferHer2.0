@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    "start": "expo start",
+    "start": "expo start --tunnel",
     "startlisa": "expo start --tunnel",
     "android": "expo start --android",
     "ios": "expo start --ios",
@@ -29,6 +29,7 @@
     "react-native-screens": "~3.18.0",
     "react-native-svg": "13.4.0",
     "socket.io-client": "^4.6.0",
+    "tailwind-colors": "^1.1.0",
     "tailwindcss": "^3.2.7"
   },
   "devDependencies": {
