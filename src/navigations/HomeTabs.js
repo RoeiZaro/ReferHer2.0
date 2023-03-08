@@ -9,6 +9,7 @@ import { Text, View, Button } from "react-native";
 
 import HomeTab from "../screens/tabs/HomeTab";
 import ProfileTab from "../screens/tabs/ProfileTab";
+import ChatNavigator from "./ChatNavigator";
 
 const Tab = createBottomTabNavigator();
 
@@ -46,11 +47,15 @@ export default function MyTabs() {
       />
       <Tab.Screen
         name="Inbox"
-        component={HomeTab}
+        component={ChatNavigator}
         options={{
           tabBarLabel: "Inbox",
           tabBarIcon: ({ color, size }) => (
-            <Icons.ChatBubbleBottomCenterTextIcon name="chat" color={color} size={size} />
+            <Icons.ChatBubbleBottomCenterTextIcon
+              name="chat"
+              color={color}
+              size={size}
+            />
           ),
         }}
       />
@@ -65,7 +70,6 @@ export default function MyTabs() {
           ),
         }}
       />
-      
     </Tab.Navigator>
   );
 }
