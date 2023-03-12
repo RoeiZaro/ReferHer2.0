@@ -10,6 +10,7 @@ import { Text, View, Button } from "react-native";
 import HomeTab from "../screens/tabs/HomeTab";
 import ProfileTab from "../screens/tabs/ProfileTab";
 import ChatNavigator from "./ChatNavigator";
+import ImageUpload from "../screens/components/ImageUpload";
 
 const Tab = createBottomTabNavigator();
 
@@ -37,7 +38,7 @@ export default function MyTabs() {
 
       <Tab.Screen
         name="Main"
-        component={HomeTab}
+        component={ImageUpload}
         options={{
           tabBarLabel: "Updates",
           tabBarIcon: ({ color, size }) => (
