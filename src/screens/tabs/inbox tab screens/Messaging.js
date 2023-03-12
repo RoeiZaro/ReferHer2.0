@@ -31,11 +31,11 @@ const Messaging = ({ route, navigation }) => {
     handleClear();
     const time = new Date();
 
-    // socket.to(_id).emit("newMessage", {
-    //   message,
-    //   user,
-    //   timestamp: time,
-    // });
+    socket.to(_id).emit("newMessage", {
+      message,
+      user,
+      timestamp: time,
+    });
 
     setChatMessages((prev) => [
       ...prev,
@@ -43,14 +43,20 @@ const Messaging = ({ route, navigation }) => {
     ]);
   };
   useLayoutEffect(() => {
-    navigation.setOptions({ title: "title" });
-    // socket.emit("findRoom", id);
-    // socket.on("foundRoom", (roomChats) => setChatMessages(roomChats));
+    navigation.setOptions({ title: name });
   }, []);
 
-  //   useEffect(() => {
-  //     socket.on("foundRoom", (roomChats) => setChatMessages(roomChats));
-  //   }, [socket]);
+  useEffect(() => {
+    socket.on("connection", () => console.log("connected"));
+    socket.on("recieve-message", (recieveMessage) => {
+      addMessage(recieveMessage);
+    });
+
+    return () => {
+      socket.off("connection");
+      socket.off("recieve-message");
+    };
+  }, []);
 
   return (
     <View style={styles.messagingscreen}>
