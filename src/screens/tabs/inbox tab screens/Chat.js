@@ -10,13 +10,6 @@ import { UserContext } from "../../../context/userContext";
 const Chat = () => {
   const { chats } = useContext(UserContext);
   const [modelvisible, setModelVisible] = useState(false);
-  const [rooms, setRooms] = useState([]);
-
-  //   useEffect(() => {
-  //     socket.on("roomsList", (rooms) => {
-  //       setRooms(rooms);
-  //     });
-  //   }, [socket]);
 
   const handleCreateGroup = () => console.log(chats);
 
@@ -24,7 +17,7 @@ const Chat = () => {
     <SafeAreaView style={styles.chatscreen}>
       <View style={styles.chattopContainer}>
         <View style={styles.chatheader}>
-          <Text style={styles.chatheading}>Chats</Text>
+          <Text style={styles.chatheading}>Inobx</Text>
           <Pressable onPress={handleCreateGroup}>
             <Icons.PencilSquareIcon name="edit" size={24} color="pink" />
           </Pressable>
@@ -40,8 +33,8 @@ const Chat = () => {
           />
         ) : (
           <View style={styles.chatemptyContainer}>
-            <Text style={styles.chatemptyText}>No rooms created!</Text>
-            <Text>Click the icon above to create a Chat room</Text>
+            <Text style={styles.chatemptyText}>No chats created!</Text>
+            <Text>Try connecting with poster and chating with them!</Text>
           </View>
         )}
       </View>

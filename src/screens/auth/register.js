@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   Alert,
   Pressable,
+  Switch,
 } from "react-native";
 import { useContext, useState } from "react";
 import * as Icons from "react-native-heroicons/solid";
@@ -230,6 +231,29 @@ export default function Register() {
                 Agree to the ToS
               </Text>
               {errors.terms && <Text>This is required.</Text>}
+            </View>
+
+            <View className=" flex-row items-center mt-5">
+              <View>
+                <Controller
+                  control={control}
+                  defaultValue={false}
+                  render={({ field: { onChange, onBlur, value } }) => (
+                    <Switch
+                      value={value}
+                      onBlur={onBlur}
+                      onValueChange={(newValue) => {
+                        onChange(newValue);
+                      }}
+                      color={value ? "#FF3591" : undefined}
+                    />
+                  )}
+                  name="terms"
+                />
+              </View>
+              <Text className="block text-sm font-bold text-gray-500">
+                Agree to the ToS
+              </Text>
             </View>
 
             {/* Submit */}
