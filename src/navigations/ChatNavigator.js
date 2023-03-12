@@ -19,7 +19,7 @@ function ChatNavigator() {
       <Stack.Screen
         name={"messaging"}
         component={Messaging}
-        options={{ headerShown: false }}
+        options={{ headerShown: true }}
       />
     </Stack.Navigator>
   );

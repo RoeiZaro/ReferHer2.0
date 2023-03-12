@@ -1,6 +1,6 @@
 import { useAsyncStorage } from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
-import { API_URL, API_URL_JWT } from "@env";
+import { API_URL, API_URL_JWT, REGISTER_TOKEN, USERNAME, PASSWORD } from "@env";
 import { createContext, useEffect, useState } from "react";
 import { Alert } from "react-native";
 import axios from "axios";
@@ -12,36 +12,7 @@ const UserProvider = ({ children }) => {
   const { setItem, getItem, removeItem } = useAsyncStorage("token");
   const [token, setToken] = useState(null);
   const [userData, setUserData] = useState(null);
-  const [chats, setChats] = useState([
-    {
-      _id: 111,
-      subscriber: 413,
-      author: 2,
-      isApproved: "approved",
-      messages: [],
-    },
-    {
-      _id: 112,
-      subscriber: 413,
-      author: 3,
-      isApproved: "approved",
-      messages: [],
-    },
-    {
-      _id: 113,
-      subscriber: 413,
-      author: 4,
-      isApproved: "approved",
-      messages: [],
-    },
-    {
-      _id: 114,
-      subscriber: 413,
-      author: 5,
-      isApproved: "approved",
-      messages: [],
-    },
-  ]);
+  const [chats, setChats] = useState([]);
 
   const readItemFromStorage = async () => {
     const item = await getItem();
@@ -115,6 +86,86 @@ const UserProvider = ({ children }) => {
     return data;
   };
 
+  // const register = async (data) => {
+  //   let useToken = REGISTER_TOKEN;
+
+  //   // checking token validity
+  //   const response = await fetch(
+  //     `https://referher.co/wp-json/jwt-auth/v1/token/validate`,
+  //     {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Accept: "application/json",
+  //         Authorization: `Bearer ${useToken}`,
+  //       },
+  //     }
+  //   );
+  //   const data = await response.json();
+
+  //   // get new token if existing is bad
+  //   if (response.status !== 200) {
+  //     console.error(`Error: ${data.message}`);
+
+  //     const body = JSON.stringify({ username: USERNAME, password: PASSWORD });
+  //     const response2 = await fetch(`${API_URL_JWT}/token`, {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Accept: "application/json",
+  //       },
+  //       body,
+  //     });
+
+  //     const data2 = await response2.json();
+
+  //     // if (response2.status !== 200) {
+  //     //   console.error(`Error: ${data.message}`);
+  //     //   if (data.message.charAt(0) === "<")
+  //     //     Alert.alert(
+  //     //       `Invalid username`,
+  //     //       `${data.message
+  //     //         .split(">")[2]
+  //     //         .slice(1, data.message.split(">")[2].length)}`
+  //     //     );
+  //     //   if (data.message.charAt(0) === "T")
+  //     //     Alert.alert(`Invalid password`, `${data.message}`);
+  //     //   return false;
+  //     // }
+
+  //     if (data2.token) useToken = data2.token;
+  //   }
+
+  //   // create new user
+  //   const { firstname, lastname, email, password, role } = data;
+  //   const boddy = JSON.stringify({
+  //     username: firstname + lastname,
+  //     password: password,
+  //     email: email,
+  //     first_name: firstname,
+  //     last_name: lastname,
+  //     name: `${firstname} ${lastname}`,
+  //     slug: firstname + lastname,
+  //     nickname: firstname + lastname,
+  //     roles: [role],
+  //   });
+  // };
+
+  const updateAvatar = async (url) => {
+    const body = JSON.stringify({ url: url });
+    await fetch(`${API_URL}/users/me`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body,
+    })
+      .then((res) => res.json())
+      .then((data) => setUserData(data))
+      .catch((err) => console.error(err));
+  };
   useEffect(() => {
     async function fetchToUserData(token) {
       const data = await whoami(token);
@@ -152,13 +203,12 @@ const UserProvider = ({ children }) => {
             user_id: userData.id,
           });
         }
-        console.log(res.data);
         setChats(res.data.chats);
       } catch (err) {
-        console.error(err);
+        console.error("couldnt get chats from server =>", err);
       }
     }
-    userData & fetchChats(userData);
+    (userData !== null) & fetchChats(userData);
   }, [userData]);
 
   return (
@@ -167,11 +217,9 @@ const UserProvider = ({ children }) => {
         token,
         chats,
         userData,
-        setToken,
         authenticate,
-        whoami,
-        removeItem,
         logout,
+        updateAvatar,
       }}
     >
       {children}
