@@ -151,6 +151,21 @@ const UserProvider = ({ children }) => {
   //   });
   // };
 
+  const updateAvatar = async (url) => {
+    const body = JSON.stringify({ url: url });
+    await fetch(`${API_URL}/users/me`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body,
+    })
+      .then((res) => res.json())
+      .then((data) => setUserData(data))
+      .catch((err) => console.error(err));
+  };
   useEffect(() => {
     async function fetchToUserData(token) {
       const data = await whoami(token);
@@ -204,6 +219,7 @@ const UserProvider = ({ children }) => {
         userData,
         authenticate,
         logout,
+        updateAvatar,
       }}
     >
       {children}
