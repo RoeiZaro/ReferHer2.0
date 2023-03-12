@@ -1,0 +1,114 @@
+// fname = lola
+// lname = boon
+// email = lola@gmail.com
+// password = fuckit1234
+// role = author
+
+
+{
+"username": "roeee",
+"name": "lola boon",
+"first_name": "lola",
+"last_name": "boon",
+"email": "lola@gmail.com",
+"nickname": "lolaboon",
+"slug": "lolaboon",
+"password": "fuckit1234"
+}
+
+
+
+"username": {
+    "description": "Login name for the user.",
+    "type": "string",
+    "required": true
+},
+"name": {
+    "description": "Display name for the user.",
+    "type": "string",
+    "required": false
+},
+"first_name": {
+    "description": "First name for the user.",
+    "type": "string",
+    "required": false
+},
+"last_name": {
+    "description": "Last name for the user.",
+    "type": "string",
+    "required": false
+},
+"email": {
+    "description": "The email address for the user.",
+    "type": "string",
+    "format": "email",
+    "required": true
+},
+"url": {
+    "description": "URL of the user.",
+    "type": "string",
+    "format": "uri",
+    "required": false
+},
+"description": {
+    "description": "Description of the user.",
+    "type": "string",
+    "required": false
+},
+"locale": {
+    "description": "Locale for the user.",
+    "type": "string",
+    "enum": [
+        "",
+        "en_US",
+        "he_IL"
+    ],
+    "required": false
+},
+"nickname": {
+    "description": "The nickname for the user.",
+    "type": "string",
+    "required": false
+},
+"slug": {
+    "description": "An alphanumeric identifier for the user.",
+    "type": "string",
+    "required": false
+},
+"roles": {
+    "description": "Roles assigned to the user.",
+    "type": "array",
+    "items": {
+        "type": "string"
+    },
+    "required": false
+},
+"password": {
+    "description": "Password for the user (never included).",
+    "type": "string",
+    "required": true
+},
+"meta": {
+    "description": "Meta fields.",
+    "type": "object",
+    "properties": {
+        "persisted_preferences": {
+            "type": "object",
+            "description": "",
+            "default": [],
+            "context": [
+                "edit"
+            ],
+            "properties": {
+                "_modified": {
+                    "description": "The date and time the preferences were updated.",
+                    "type": "string",
+                    "format": "date-time",
+                    "readonly": false
+                }
+            },
+            "additionalProperties": true
+        }
+    },
+    "required": false
+}

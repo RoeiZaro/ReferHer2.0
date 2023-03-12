@@ -10,6 +10,7 @@ import {
 import { useContext, useEffect } from "react";
 import { UserContext } from "../../context/userContext";
 import { SafeAreaView } from "react-native-safe-area-context";
+import ImageUpload from "../components/ImageUpload";
 
 export default function ProfileTab() {
   const { userData, logout } = useContext(UserContext);
@@ -40,10 +41,14 @@ export default function ProfileTab() {
               {userData?.roles.map((role) => role).join(", ")}
             </Text>
           </View>
-          <Image
-            className="w-14 h-14 rounded-full border-2 ml-auto border-blue-300"
-            source={{ uri: userData?.avatar_urls[48] }}
-          />
+          <View className="ml-auto">
+            <ImageUpload>
+              <Image
+                className="w-14 h-14 rounded-full border-2  border-blue-300"
+                source={{ uri: userData?.url }}
+              />
+            </ImageUpload>
+          </View>
         </View>
         <View className="border-t border-gray-200 px-4 py-5 divide-y divide-gray-200">
           <View className="py-4 flex-row items-center justify-between">

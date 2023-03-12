@@ -3,8 +3,8 @@ import { NavigationContainer } from "@react-navigation/native";
 import AuthNavigator from "./src/navigations/AuthNavigator";
 import UserProvider from "./src/context/userContext";
 import SplashScreen from "./src/screens/auth/splashScreen";
-
 // import { useFonts } from 'expo-font';
+
 
 export default function App() {
   const sleep = (ms) => {
@@ -33,5 +33,7 @@ export default function App() {
         </UserProvider>
       )}
     </NavigationContainer>
+
+
   );
 }

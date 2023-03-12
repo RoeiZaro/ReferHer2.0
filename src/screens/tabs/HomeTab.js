@@ -13,7 +13,7 @@ export default function HomeTab() {
           <StatusBar style="light" />
         </SafeAreaView>
         <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-          <Text>Your Notifications is empty!</Text>
+          <Text>Your Notifications are empty!</Text>
         </View>
       </>
     );

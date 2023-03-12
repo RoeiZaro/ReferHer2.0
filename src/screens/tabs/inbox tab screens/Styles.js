@@ -14,6 +14,9 @@ export const styles = StyleSheet.create({
   },
   chattopContainer: {
     backgroundColor: "#d8b4fe",
+
+    marginTop: 30,
+    backgroundColor: "#F7F7F7",
     height: 70,
     width: "100%",
     padding: 20,
