@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
   chatscreen: {
-    backgroundColor: "#F7F7F7",
+    backgroundColor: "#d8b4fe",
     flex: 1,
     padding: 10,
     position: "relative",
@@ -10,9 +10,11 @@ export const styles = StyleSheet.create({
   chatheading: {
     fontSize: 24,
     fontWeight: "bold",
-    color: "pink",
+    color: "white",
   },
   chattopContainer: {
+    backgroundColor: "#d8b4fe",
+
     marginTop: 30,
     backgroundColor: "#F7F7F7",
     height: 70,

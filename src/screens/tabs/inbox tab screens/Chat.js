@@ -19,7 +19,7 @@ const Chat = () => {
         <View style={styles.chatheader}>
           <Text style={styles.chatheading}>Inobx</Text>
           <Pressable onPress={handleCreateGroup}>
-            <Icons.PencilSquareIcon name="edit" size={24} color="pink" />
+            <Icons.PencilSquareIcon name="edit" size={24} color="white" />
           </Pressable>
         </View>
       </View>
