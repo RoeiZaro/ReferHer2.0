@@ -11,6 +11,7 @@ import HomeTab from "../screens/tabs/HomeTab";
 import ProfileTab from "../screens/tabs/ProfileTab";
 import ChatNavigator from "./ChatNavigator";
 import ImageUpload from "../screens/components/ImageUpload";
+import PostsTab from "../screens/tabs/PostsTab";
 
 const Tab = createBottomTabNavigator();
 
@@ -31,11 +32,20 @@ export default function MyTabs() {
         options={{
           tabBarLabel: "Home",
           tabBarIcon: ({ color, size }) => (
-            <Icons.SparklesIcon name="home" color={color} size={size} />
+            <Icons.HomeIcon name="home" color={color} size={size} />
           ),
         }}
       />
-
+      <Tab.Screen
+        name="Posts"
+        component={PostsTab}
+        options={{
+          tabBarLabel: "Posts",
+          tabBarIcon: ({ color, size }) => (
+            <Icons.RectangleGroupIcon name="bell" color={color} size={size} />
+          ),
+        }}
+      />
       <Tab.Screen
         name="Main"
         component={ImageUpload}
