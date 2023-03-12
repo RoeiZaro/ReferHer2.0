@@ -5,6 +5,7 @@ import {
   StatusBar,
   Button,
   ActivityIndicator,
+  Pressable
 } from "react-native";
 import { useContext, useEffect } from "react";
 import { UserContext } from "../../context/userContext";
@@ -71,6 +72,9 @@ export default function ProfileTab() {
               {userData ? getHumanReadableDate(userData?.registered_date) : "j"}
             </Text>
           </View>
+          <Pressable className="items-center justify-center px-3.5 py-8 rounded" onPress={() => logout()}>
+      <Text className="">logout</Text>
+    </Pressable>
           <Button title="logout" onPress={() => logout()} />
         </View>
       </View>
