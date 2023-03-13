@@ -103,7 +103,6 @@ const UserProvider = ({ children }) => {
       nickname: firstName + lastName,
       roles: role,
     });
-    console.log(boddy);
     await fetch(`${API_URL}/users`, {
       method: "POST",
       headers: {
@@ -114,7 +113,28 @@ const UserProvider = ({ children }) => {
       body: boddy,
     })
       .then((response) => response.json())
-      .then((pl) => console.error(pl))
+      .then((pl) => {
+        console.error(pl);
+        if (pl.id) {
+          Alert.alert(
+            "register completed successfully",
+            "You will redirect to the login page",
+            [
+              {
+                text: "Ok",
+                onPress: () =>
+                  navigate.navigate("Login", { username: pl.username }),
+                style: "destructive",
+              },
+            ],
+            {
+              cancelable: true,
+              onDismiss: () =>
+                navigate.navigate("Login", { username: pl.username }),
+            }
+          );
+        }
+      })
       .catch((err) => console.error(err));
   };
 

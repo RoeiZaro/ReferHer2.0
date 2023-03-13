@@ -12,7 +12,7 @@ import { StatusBar as Statusbarr } from "expo-status-bar";
 import { useForm, Controller } from "react-hook-form";
 import * as Icons from "react-native-heroicons/solid";
 
-export default function Login() {
+export default function Login({ route }) {
   const { authenticate } = useContext(UserContext);
   const [authRes, setAuthRes] = useState(null);
   const [seePass, setSeePass] = useState(false);
@@ -21,7 +21,12 @@ export default function Login() {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm({ defaultValues: { username: "", password: "" } });
+  } = useForm({
+    defaultValues: {
+      username: route?.params ? route?.params?.username : "",
+      password: "",
+    },
+  });
 
   const onSubmit = (data) => {
     const { username, password } = data;
