@@ -87,70 +87,36 @@ const UserProvider = ({ children }) => {
     return data;
   };
 
-  // const register = async (data) => {
-  //   let useToken = REGISTER_TOKEN;
+  const register = async (formData) => {
+    let useToken = REGISTER_TOKEN;
 
-  //   // checking token validity
-  //   const response = await fetch(
-  //     `https://referher.co/wp-json/jwt-auth/v1/token/validate`,
-  //     {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         Accept: "application/json",
-  //         Authorization: `Bearer ${useToken}`,
-  //       },
-  //     }
-  //   );
-  //   const data = await response.json();
-
-  //   // get new token if existing is bad
-  //   if (response.status !== 200) {
-  //     console.error(`Error: ${data.message}`);
-
-  //     const body = JSON.stringify({ username: USERNAME, password: PASSWORD });
-  //     const response2 = await fetch(`${API_URL_JWT}/token`, {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         Accept: "application/json",
-  //       },
-  //       body,
-  //     });
-
-  //     const data2 = await response2.json();
-
-  //     // if (response2.status !== 200) {
-  //     //   console.error(`Error: ${data.message}`);
-  //     //   if (data.message.charAt(0) === "<")
-  //     //     Alert.alert(
-  //     //       `Invalid username`,
-  //     //       `${data.message
-  //     //         .split(">")[2]
-  //     //         .slice(1, data.message.split(">")[2].length)}`
-  //     //     );
-  //     //   if (data.message.charAt(0) === "T")
-  //     //     Alert.alert(`Invalid password`, `${data.message}`);
-  //     //   return false;
-  //     // }
-
-  //     if (data2.token) useToken = data2.token;
-  //   }
-
-  //   // create new user
-  //   const { firstname, lastname, email, password, role } = data;
-  //   const boddy = JSON.stringify({
-  //     username: firstname + lastname,
-  //     password: password,
-  //     email: email,
-  //     first_name: firstname,
-  //     last_name: lastname,
-  //     name: `${firstname} ${lastname}`,
-  //     slug: firstname + lastname,
-  //     nickname: firstname + lastname,
-  //     roles: [role],
-  //   });
-  // };
+    // create new user
+    const { firstName, lastName, email, password, role } = formData;
+    const boddy = JSON.stringify({
+      username: firstName + lastName,
+      password: password,
+      email: email,
+      first_name: firstName,
+      last_name: lastName,
+      name: `${firstName} ${lastName}`,
+      slug: firstName + lastName,
+      nickname: firstName + lastName,
+      roles: role,
+    });
+    console.log(boddy);
+    await fetch(`${API_URL}/users`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${useToken}`,
+      },
+      body: boddy,
+    })
+      .then((response) => response.json())
+      .then((pl) => console.error(pl))
+      .catch((err) => console.error(err));
+  };
 
   const updateAvatar = async (url) => {
     const body = JSON.stringify({ url: url });
@@ -167,6 +133,7 @@ const UserProvider = ({ children }) => {
       .then((data) => setUserData(data))
       .catch((err) => console.error(err));
   };
+
   useEffect(() => {
     async function fetchToUserData(token) {
       const data = await whoami(token);
@@ -220,6 +187,7 @@ const UserProvider = ({ children }) => {
         userData,
         authenticate,
         logout,
+        register,
         updateAvatar,
       }}
     >
