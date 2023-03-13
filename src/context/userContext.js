@@ -87,6 +87,70 @@ const UserProvider = ({ children }) => {
     return data;
   };
 
+  const registerWithCustomUsername = async (data, added, usedToken) => {
+    const { firstName, lastName, email, password, role } = data;
+    const body = JSON.stringify({
+      username: `${firstName}${lastName}${added}`,
+      password: password,
+      email: email,
+      first_name: firstName,
+      last_name: lastName,
+      name: `${firstName} ${lastName}`,
+      slug: firstName + lastName,
+      nickname: firstName + lastName,
+      roles: role,
+    });
+    await fetch(`${API_URL}/users`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${usedToken}`,
+      },
+      body,
+    })
+      .then((response) => response.json())
+      .then((pl) => {
+        if (pl.id) {
+          Alert.alert(
+            "register completed successfully",
+            "You will redirect to the login page",
+            [
+              {
+                text: "Ok",
+                onPress: () =>
+                  navigate.navigate("Login", { username: pl.username }),
+                style: "destructive",
+              },
+            ],
+            {
+              cancelable: true,
+              onDismiss: () =>
+                navigate.navigate("Login", { username: pl.username }),
+            }
+          );
+        } else if (pl.code) {
+          if (pl.code == "existing_user_login")
+            registerWithCustomUsername(data, added + 1, usedToken);
+          else {
+            Alert.alert(
+              "Error while trying to register",
+              pl.message,
+              [
+                {
+                  text: "Ok",
+                },
+              ],
+              {
+                cancelable: true,
+              }
+            );
+          }
+        }
+      })
+      .catch((err) => console.log(err));
+  };
+
   const register = async (formData) => {
     let useToken = REGISTER_TOKEN;
 
@@ -103,7 +167,6 @@ const UserProvider = ({ children }) => {
       nickname: firstName + lastName,
       roles: role,
     });
-    console.log(boddy);
     await fetch(`${API_URL}/users`, {
       method: "POST",
       headers: {
@@ -114,8 +177,45 @@ const UserProvider = ({ children }) => {
       body: boddy,
     })
       .then((response) => response.json())
-      .then((pl) => console.error(pl))
-      .catch((err) => console.error(err));
+      .then((pl) => {
+        if (pl.id) {
+          Alert.alert(
+            "register completed successfully",
+            "You will redirect to the login page",
+            [
+              {
+                text: "Ok",
+                onPress: () =>
+                  navigate.navigate("Login", { username: pl.username }),
+                style: "destructive",
+              },
+            ],
+            {
+              cancelable: true,
+              onDismiss: () =>
+                navigate.navigate("Login", { username: pl.username }),
+            }
+          );
+        } else if (pl.code) {
+          if (pl.code == "existing_user_login")
+            registerWithCustomUsername(formData, 1, useToken);
+          else {
+            Alert.alert(
+              "Error while trying to register",
+              pl.message,
+              [
+                {
+                  text: "Ok",
+                },
+              ],
+              {
+                cancelable: true,
+              }
+            );
+          }
+        }
+      })
+      .catch((err) => console.log(err));
   };
 
   const updateAvatar = async (url) => {
