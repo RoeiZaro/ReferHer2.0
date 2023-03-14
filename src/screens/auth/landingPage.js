@@ -25,35 +25,33 @@ export default function LandingPage() {
         </View>
         <View className="flex-column flex-1 bg-purple-300 justify-around items-center">
           <View className="w-full ">
-          <LottieView
-        autoPlay
-        style={{
-          width: 200,
-          height: 200,
-          backgroundColor: '#d8b4fe',
-        }}
-      
-        source={require('../../../assets/homepage.json')}
-      />
+            <LottieView
+              autoPlay
+              style={{
+                width: 200,
+                height: 200,
+                backgroundColor: "#d8b4fe",
+              }}
+              source={require("../../../assets/homepage.json")}
+            />
           </View>
           <View className="flex-row justify-around ">
-          <TouchableOpacity
-            className=" bg-purple-800 w-24 h-14  border-2 rounded-xl border-white  items-center justify-center shadow-xl"
-            onPress={() => navigation.navigate("Login")}
-          >
-            <Text className="text-white justify-center text-base font-bold">
-              Login
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            className=" bg-purple-800 w-24 h-14 rounded-xl border-2 border-white  items-center   justify-center"
-            onPress={() => navigation.navigate("Register")}
-          >
-            <Text className="text-white justify-center text-base font-bold">
-              Register now
-            </Text>
-          </TouchableOpacity>
-
+            <TouchableOpacity
+              className=" bg-purple-800 w-24 h-14  border-2 rounded-xl border-white  items-center justify-center shadow-xl"
+              onPress={() => navigation.navigate("Login")}
+            >
+              <Text className="text-white justify-center text-base font-bold">
+                Login
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              className=" bg-purple-800 w-24 h-14 rounded-xl border-2 border-white  items-center   justify-center"
+              onPress={() => navigation.navigate("Register")}
+            >
+              <Text className="text-white justify-center text-base font-bold">
+                Register now
+              </Text>
+            </TouchableOpacity>
           </View>
         </View>
       </View>
