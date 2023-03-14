@@ -3,7 +3,7 @@ import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { StatusBar as Statusbarr } from "expo-status-bar";
-import LottieView from "lottie-react-native";
+// import LottieView from "lottie-react-native";
 
 export default function LandingPage() {
   const navigation = useNavigation();
@@ -25,15 +25,17 @@ export default function LandingPage() {
         </View>
         <View className="flex-column flex-1 bg-purple-300 justify-around items-center">
           <View className="w-full ">
-            <LottieView
-              autoPlay
-              style={{
-                width: 200,
-                height: 200,
-                backgroundColor: "#d8b4fe",
-              }}
-              source={require("../../../assets/homepage.json")}
-            />
+
+            {/* <LottieView
+        autoPlay
+        style={{
+          width: 200,
+          height: 200,
+          backgroundColor: '#d8b4fe',
+        }}
+      
+        source={require('../../../assets/homepage.json')}
+      /> */}
           </View>
           <View className="flex-row justify-around ">
             <TouchableOpacity
