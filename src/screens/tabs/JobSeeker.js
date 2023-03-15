@@ -1,14 +1,6 @@
 import { ScrollView, View, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-// --------------- what to do --------------------
-/* add: 
-- red alert
-- templates from the site (pages) / copy template
-- style + change colors for all components
-
-*/
-
 function JobSeeker() {
   let template = [
     {
