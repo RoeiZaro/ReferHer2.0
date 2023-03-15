@@ -81,7 +81,9 @@ All while ensuring that women are getting the credit for referring candidates to
 
 
 <View style={styles.fourth_container}>
-<Text style={styles.subheader}>How It Works</Text>
+<ImageBackground source={lingrad} style={styles.background} >
+<Text style={styles.qaa}>How It Works</Text>
+</ImageBackground>
 <Image  source={dreamjob} style={{ width: 300, height: 300 }}/>
 
 <Collapse>
@@ -151,7 +153,66 @@ All while ensuring that women are getting the credit for referring candidates to
 </View>
 
 <View style={styles.second_container}>
-<Text style={styles.subheader}>Most Asked Questions</Text>
+<ImageBackground source={lingrad} style={styles.background} >  
+<Text style={styles.qa}>Most Asked Questions</Text>
+</ImageBackground>
+<Text style={styles.qa2}>Check out the answers below</Text>
+
+<Collapse>
+    <CollapseHeader>
+      <View>
+      <Card style={{padding: 10, margin: 10, borderRadius:30, backgroundColor:'#FF7550'}}>
+        <Text style={styles.card_header}>Can men sign up to be “referrers”?</Text>
+      </Card>
+      </View>
+    </CollapseHeader>
+    <CollapseBody>
+    <Card style={{padding: 10, margin: 10}}>
+        <Text style={styles.card_text}>We limit referrers to women to ensure they 
+        are getting credit from their companies. Many companies have incentives for 
+        “referring a friend.” We want to see these incentives going to more women 💸 
+        Additionally, job seekers may not feel comfortable asking certain questions about a 
+        company’s culture, etc. to a male referrer. Finally, we hope to help job seekers find
+         female role models at companies they are applying to.</Text>
+      </Card>
+    </CollapseBody>
+</Collapse>
+
+
+<Collapse>
+    <CollapseHeader>
+      <View>
+      <Card style={{padding: 10, margin: 10, borderRadius:30, backgroundColor:'#FF7550'}}>
+        <Text style={styles.card_header}>Is ReferHer free?</Text>
+      </Card>
+      </View>
+    </CollapseHeader>
+    <CollapseBody>
+    <Card style={{padding: 10, margin: 10}}>
+        <Text style={styles.card_text}>Yes! We only ask if you are a job seeker that you pay 
+        it forward and become a “referrer” once you have found a job.</Text>
+      </Card>
+    </CollapseBody>
+</Collapse>
+
+
+<Collapse>
+    <CollapseHeader>
+      <View>
+      <Card style={{padding: 10, margin: 10, borderRadius:30, backgroundColor:'#FF7550'}}>
+        <Text style={styles.card_header}>How do I ask a referrer to refer me?</Text>
+      </Card>
+      </View>
+    </CollapseHeader>
+    <CollapseBody>
+    <Card style={{padding: 10, margin: 10}}>
+        <Text style={styles.card_text}>If you have created an account as a job seeker you will have a 
+        tab filled with templates to use. It’s as easy as copying and pasting!  For more tips join our 
+        monthly webinar where we share the best practices for getting your dream job.</Text>
+      </Card>
+    </CollapseBody>
+</Collapse>
+
 </View>
 
 
@@ -235,6 +296,20 @@ All while ensuring that women are getting the credit for referring candidates to
       lineHeight: 35,
       marginBottom:40,
       marginTop: 30,
+    },
+    qa: {
+      color: '#15172C',
+      fontSize:45,
+    },
+    qaa: {
+      color: '#15172C',
+      fontSize:60,
+    },
+    qa2: {
+      color: '#15172C',
+      fontSize:25,
+      marginBottom:30,
+      marginTop:20,
     },
     last_container: {
       flex: 1,

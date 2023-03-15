@@ -25,20 +25,16 @@ export default function LandingPage() {
         </View>
         <View className="flex-column flex-1 bg-purple-300 justify-around items-center">
           <View className="w-full ">
-
             {/* <LottieView
-          {/* <View className="w-full ">
-          <LottieView
-        autoPlay
-        style={{
-          width: 200,
-          height: 200,
-          backgroundColor: '#d8b4fe',
-        }}
-      
-        source={require('../../../assets/homepage.json')}
-      />
-          </View> */}
+              autoPlay
+              style={{
+                width: 200,
+                height: 200,
+                backgroundColor: '#d8b4fe',
+              }}
+              source={require('../../../assets/homepage.json')}
+            /> */}
+          </View>
           <View className="flex-row justify-around ">
             <TouchableOpacity
               className=" bg-purple-800 w-24 h-14  border-2 rounded-xl border-white  items-center justify-center shadow-xl"
@@ -62,3 +58,4 @@ export default function LandingPage() {
     </>
   );
 }
+
