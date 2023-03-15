@@ -26,11 +26,8 @@ import lingrad from "../../../assets/lingrad.png";
 import referherhome from "../../../assets/referherhome.png";
 import referherposts from "../../../assets/referherposts.png";
 import dreamjob from "../../../assets/dreamjob.png";
-import { useNavigation } from "@react-navigation/native";
 
 export default function HomeTab() {
-  const navigation = useNavigation();
-
   const { removeItem } = useContext(UserContext);
 
   return (

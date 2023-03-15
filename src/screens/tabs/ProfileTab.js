@@ -77,9 +77,9 @@ export default function ProfileTab() {
               {userData ? getHumanReadableDate(userData?.registered_date) : "j"}
             </Text>
           </View>
-          <Pressable className="items-center justify-center px-3.5 py-8 rounded" onPress={() => logout()}>
+          {/* <Pressable className="items-center justify-center px-3.5 py-8 rounded" onPress={() => logout()}>
       <Text className="">logout</Text>
-    </Pressable>
+    </Pressable> */}
           <Button title="logout" onPress={() => logout()} />
         </View>
       </View>

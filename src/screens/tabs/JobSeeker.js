@@ -1,5 +1,8 @@
-import { ScrollView, View, Text } from "react-native";
+import { ScrollView, View, Text,  StyleSheet, } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import {Card} from 'react-native-shadow-cards';
+import {Collapse,CollapseHeader, CollapseBody, AccordionList} from 'accordion-collapse-react-native';
+
 
 function JobSeeker() {
   let template = [
@@ -40,7 +43,7 @@ function JobSeeker() {
               ease. Just copy the ones you like and use them to start a
               conversation!
             </Text>
-
+          
             <Text className="p-2 text-referwhite bg-referblue pb-5">
               ** e sure to read through the entire message to fill in blanks and
               add a more personal touch
@@ -49,6 +52,7 @@ function JobSeeker() {
           <View>
             {template.map((data, i) => {
               return (
+                
                 <View
                   key={i}
                   className="p-5 pb-6 bg-referwhite rounded-lg shadow-2xl m-3 "
@@ -76,3 +80,99 @@ function JobSeeker() {
 }
 
 export default JobSeeker;
+
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#1d003e',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  header: {
+    // color:'#ff5c33',
+    color: '#15172C',
+    fontSize:100,
+  },
+  second_header: {
+    color: '#15172C',
+    fontSize:60,
+  },
+  background: {
+    marginTop: 30,
+  },
+  subheader: {
+    color:'#ff5c33',
+    fontSize:50,
+  },
+  text: {
+    color: '#DDDAEF',
+    fontSize:25,
+    lineHeight: 45,
+  },
+  second_container: {
+    flex: 1,
+    backgroundColor: '#FFFFFF',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  third_container: {
+    flex: 1,
+    backgroundColor: '#ECEEFA',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  second_text: {
+    color: '#15172C',
+    fontSize:25,
+    lineHeight: 45,
+  },
+  card_header: {
+    color: '#15172C',
+    fontSize:30,
+  },
+  card_text: {
+    color: '#15172C',
+    fontSize:20,
+    lineHeight: 35,
+  },
+  fourth_container: {
+    flex: 1,
+    backgroundColor: '#DDDAEF',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  collapsable_text: {
+    color: '#15172C',
+    fontSize:25,
+    lineHeight: 45,
+    marginBottom:30,
+    marginTop: 20,
+    padding:20,
+  },
+  qa: {
+    color: '#15172C',
+    fontSize:45,
+  },
+  qaa: {
+    color: '#15172C',
+    fontSize:60,
+  },
+  qa2: {
+    color: '#15172C',
+    fontSize:25,
+    marginBottom:30,
+    marginTop:20,
+  },
+  last_container: {
+    flex: 1,
+    backgroundColor: '#000080',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  reserved: {
+    color: '#FFFFFF',
+    fontSize: 20,
+    marginBottom:25,
+  },
+});
