@@ -9,10 +9,10 @@ import lingrad from '../../../assets/lingrad.png';
 import referherhome from '../../../assets/referherhome.png';
 import referherposts from '../../../assets/referherposts.png';
 import dreamjob from '../../../assets/dreamjob.png';
-import { useNavigation } from "@react-navigation/native";
+
 
 export default function HomeTab() {
-  const navigation = useNavigation();
+  
 
     const { removeItem } = useContext(UserContext);
   
@@ -222,11 +222,6 @@ All while ensuring that women are getting the credit for referring candidates to
 
 <View style={styles.last_container}>
 <Text style={styles.reserved}>© 2023 ReferHer. All Rights Reserved.</Text>
-<TouchableOpacity onPress={() => navigation.navigate("Privacy")}>
-<Text style={styles.reserved}>Privacy Policy</Text>
-            </TouchableOpacity>
-
-<Text style={styles.reserved}>Terms of Service</Text>
 </View>
         </ScrollView>
 
