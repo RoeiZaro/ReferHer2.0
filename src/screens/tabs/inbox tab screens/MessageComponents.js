@@ -2,6 +2,7 @@ import { View, Text } from "react-native";
 import React from "react";
 import * as Icons from "react-native-heroicons/solid";
 import { styles } from "./Styles";
+import moment from "moment";
 
 export default function MessageComponent({ item, userId }) {
   const status = item.creator !== userId;
@@ -34,7 +35,9 @@ export default function MessageComponent({ item, userId }) {
             <Text>{item.text}</Text>
           </View>
         </View>
-        <Text style={{ marginLeft: 40 }}>{item.time.toString()}</Text>
+        <Text style={{ marginLeft: 40 }}>
+          {moment(item.time).format("HH:mm")}
+        </Text>
       </View>
     </View>
   );
