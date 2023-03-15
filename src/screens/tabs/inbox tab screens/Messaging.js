@@ -60,7 +60,7 @@ const Messaging = ({ route, navigation }) => {
     ]);
 
     try {
-      const res = await axios.post(`${CHAT_API}:4000/addMessage`, {
+      const res = await axios.post(`http://192.168.50.75c:4000/addMessage`, {
         chatId: _id,
         message: { text: message, creator: userId, time: time, seen: "false" },
       });
