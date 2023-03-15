@@ -12,7 +12,7 @@ import PostsTab from "../screens/tabs/PostsTab";
 import JobSeeker from "../screens/tabs/JobSeeker";
 
 import { io } from "socket.io-client";
-
+import FooterNav from "./FooterNav";
 
 const Tab = createBottomTabNavigator();
 
@@ -40,7 +40,7 @@ export default function MyTabs() {
     >
       <Tab.Screen
         name="Feed"
-        component={HomeTab}
+        component={FooterNav}
         options={{
           tabBarLabel: "Home",
           tabBarIcon: ({ color, size }) => (
