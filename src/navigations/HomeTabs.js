@@ -12,6 +12,7 @@ import ProfileTab from "../screens/tabs/ProfileTab";
 import ChatNavigator from "./ChatNavigator";
 import ImageUpload from "../screens/components/ImageUpload";
 import PostsTab from "../screens/tabs/PostsTab";
+import JobSeeker from "../screens/tabs/JobSeeker";
 
 const Tab = createBottomTabNavigator();
 
@@ -48,11 +49,15 @@ export default function MyTabs() {
       />
       <Tab.Screen
         name="Main"
-        component={ImageUpload}
+        component={JobSeeker}
         options={{
-          tabBarLabel: "Updates",
+          tabBarLabel: "Templates",
           tabBarIcon: ({ color, size }) => (
-            <Icons.BellIcon name="bell" color={color} size={size} />
+            <Icons.DocumentDuplicateIcon
+              name="bell"
+              color={color}
+              size={size}
+            />
           ),
         }}
       />
