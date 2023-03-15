@@ -1,8 +1,8 @@
 import { useAsyncStorage } from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 
-import { API_URL, API_URL_JWT, REGISTER_TOKEN, USERNAME, PASSWORD } from "@env";
-import { createContext, useEffect, useState } from "react";
+import { API_URL, API_URL_JWT, REGISTER_TOKEN, CHAT_API } from "@env";
+import { createContext, useEffect, useRef, useState } from "react";
 import { Alert } from "react-native";
 import axios from "axios";
 
@@ -14,6 +14,7 @@ const UserProvider = ({ children }) => {
   const [token, setToken] = useState(null);
   const [userData, setUserData] = useState(null);
   const [chats, setChats] = useState([]);
+  const socket = useRef();
 
   const readItemFromStorage = async () => {
     const item = await getItem();
@@ -263,17 +264,21 @@ const UserProvider = ({ children }) => {
       try {
         let res = {};
         if (userData.roles.includes("author")) {
-          res = await axios.post("http://192.168.50.60:4000/authorChat", {
+          res = await axios.post(`${CHAT_API}:4000/authorChat`, {
             user_id: userData.id,
           });
         } else if (userData.roles.includes("subscriber")) {
-          res = await axios.post("http://192.168.50.60:4000/subscriberChat", {
+          res = await axios.post(`${CHAT_API}:4000/subscriberChat`, {
             user_id: userData.id,
           });
         }
         setChats(res.data.chats);
       } catch (err) {
-        console.error("couldnt get chats from server =>", err);
+        console.error(
+          "couldnt get chats from server =>",
+          err,
+          `${CHAT_API}:4000/subscriberChat`
+        );
       }
     }
     (userData !== null) & fetchChats(userData);
@@ -289,6 +294,7 @@ const UserProvider = ({ children }) => {
         logout,
         register,
         updateAvatar,
+        socket,
       }}
     >
       {children}
