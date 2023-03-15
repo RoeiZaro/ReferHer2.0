@@ -9,7 +9,11 @@ import lingrad from '../../../assets/lingrad.png';
 import referherhome from '../../../assets/referherhome.png';
 import referherposts from '../../../assets/referherposts.png';
 import dreamjob from '../../../assets/dreamjob.png';
+import { useNavigation } from "@react-navigation/native";
+
 export default function HomeTab() {
+  const navigation = useNavigation();
+
     const { removeItem } = useContext(UserContext);
   
     return (
@@ -218,7 +222,10 @@ All while ensuring that women are getting the credit for referring candidates to
 
 <View style={styles.last_container}>
 <Text style={styles.reserved}>© 2023 ReferHer. All Rights Reserved.</Text>
+<TouchableOpacity onPress={() => navigation.navigate("Privacy")}>
 <Text style={styles.reserved}>Privacy Policy</Text>
+            </TouchableOpacity>
+
 <Text style={styles.reserved}>Terms of Service</Text>
 </View>
         </ScrollView>
@@ -292,10 +299,11 @@ All while ensuring that women are getting the credit for referring candidates to
     },
     collapsable_text: {
       color: '#15172C',
-      fontSize:20,
-      lineHeight: 35,
-      marginBottom:40,
-      marginTop: 30,
+      fontSize:25,
+      lineHeight: 45,
+      marginBottom:30,
+      marginTop: 20,
+      padding:20,
     },
     qa: {
       color: '#15172C',

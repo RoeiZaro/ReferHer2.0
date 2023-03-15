@@ -4,7 +4,7 @@ import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { StatusBar as Statusbarr } from "expo-status-bar";
 // import LottieView from "lottie-react-native";
-
+    //
 export default function LandingPage() {
   const navigation = useNavigation();
 
