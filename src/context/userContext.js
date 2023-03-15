@@ -263,25 +263,22 @@ const UserProvider = ({ children }) => {
     async function fetchChats(userData) {
       try {
         let res = {};
-        if (userData.roles.includes("author")) {
-          res = await axios.post(`${CHAT_API}:4000/authorChat`, {
+        if (userData.id != 413 && userData.roles.includes("author")) {
+          res = await axios.post(`http://192.168.50.75:4000/authorChat`, {
             user_id: userData.id,
           });
-        } else if (userData.roles.includes("subscriber")) {
-          res = await axios.post(`${CHAT_API}:4000/subscriberChat`, {
+        } else {
+          res = await axios.post(`http://192.168.50.75:4000/subscriberChat`, {
             user_id: userData.id,
           });
         }
         setChats(res.data.chats);
       } catch (err) {
-        console.error(
-          "couldnt get chats from server =>",
-          err,
-          `${CHAT_API}:4000/subscriberChat`
-        );
+        console.error("couldnt get chats from server =>", err);
       }
     }
-    (userData !== null) & fetchChats(userData);
+    fetchChats(userData);
+    console.log(chats);
   }, [userData]);
 
   return (
