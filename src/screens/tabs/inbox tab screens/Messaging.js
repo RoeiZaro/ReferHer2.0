@@ -30,6 +30,7 @@ const Messaging = ({ route, navigation }) => {
   useEffect(() => {
     socket.current.on("get-message", (msg) => {
       setChatMessages((prev) => [...prev, msg]);
+      flatlistRef.current?.scrollToEnd();
     });
 
     return () => {
