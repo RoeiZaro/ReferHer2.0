@@ -1,8 +1,8 @@
 import { useAsyncStorage } from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 
-import { API_URL, API_URL_JWT, REGISTER_TOKEN, USERNAME, PASSWORD } from "@env";
-import { createContext, useEffect, useState } from "react";
+import { API_URL, API_URL_JWT, REGISTER_TOKEN, CHAT_API } from "@env";
+import { createContext, useEffect, useRef, useState } from "react";
 import { Alert } from "react-native";
 import axios from "axios";
 
@@ -14,6 +14,7 @@ const UserProvider = ({ children }) => {
   const [token, setToken] = useState(null);
   const [userData, setUserData] = useState(null);
   const [chats, setChats] = useState([]);
+  const socket = useRef();
 
   const readItemFromStorage = async () => {
     const item = await getItem();
@@ -87,6 +88,70 @@ const UserProvider = ({ children }) => {
     return data;
   };
 
+  const registerWithCustomUsername = async (data, added, usedToken) => {
+    const { firstName, lastName, email, password, role } = data;
+    const body = JSON.stringify({
+      username: `${firstName}${lastName}${added}`,
+      password: password,
+      email: email,
+      first_name: firstName,
+      last_name: lastName,
+      name: `${firstName} ${lastName}`,
+      slug: firstName + lastName,
+      nickname: firstName + lastName,
+      roles: role,
+    });
+    await fetch(`${API_URL}/users`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${usedToken}`,
+      },
+      body,
+    })
+      .then((response) => response.json())
+      .then((pl) => {
+        if (pl.id) {
+          Alert.alert(
+            "register completed successfully",
+            "You will redirect to the login page",
+            [
+              {
+                text: "Ok",
+                onPress: () =>
+                  navigate.navigate("Login", { username: pl.username }),
+                style: "destructive",
+              },
+            ],
+            {
+              cancelable: true,
+              onDismiss: () =>
+                navigate.navigate("Login", { username: pl.username }),
+            }
+          );
+        } else if (pl.code) {
+          if (pl.code == "existing_user_login")
+            registerWithCustomUsername(data, added + 1, usedToken);
+          else {
+            Alert.alert(
+              "Error while trying to register",
+              pl.message,
+              [
+                {
+                  text: "Ok",
+                },
+              ],
+              {
+                cancelable: true,
+              }
+            );
+          }
+        }
+      })
+      .catch((err) => console.log(err));
+  };
+
   const register = async (formData) => {
     let useToken = REGISTER_TOKEN;
 
@@ -103,7 +168,6 @@ const UserProvider = ({ children }) => {
       nickname: firstName + lastName,
       roles: role,
     });
-    console.log(boddy);
     await fetch(`${API_URL}/users`, {
       method: "POST",
       headers: {
@@ -114,8 +178,45 @@ const UserProvider = ({ children }) => {
       body: boddy,
     })
       .then((response) => response.json())
-      .then((pl) => console.error(pl))
-      .catch((err) => console.error(err));
+      .then((pl) => {
+        if (pl.id) {
+          Alert.alert(
+            "register completed successfully",
+            "You will redirect to the login page",
+            [
+              {
+                text: "Ok",
+                onPress: () =>
+                  navigate.navigate("Login", { username: pl.username }),
+                style: "destructive",
+              },
+            ],
+            {
+              cancelable: true,
+              onDismiss: () =>
+                navigate.navigate("Login", { username: pl.username }),
+            }
+          );
+        } else if (pl.code) {
+          if (pl.code == "existing_user_login")
+            registerWithCustomUsername(formData, 1, useToken);
+          else {
+            Alert.alert(
+              "Error while trying to register",
+              pl.message,
+              [
+                {
+                  text: "Ok",
+                },
+              ],
+              {
+                cancelable: true,
+              }
+            );
+          }
+        }
+      })
+      .catch((err) => console.log(err));
   };
 
   const updateAvatar = async (url) => {
@@ -163,17 +264,21 @@ const UserProvider = ({ children }) => {
       try {
         let res = {};
         if (userData.roles.includes("author")) {
-          res = await axios.post("http://192.168.50.60:4000/authorChat", {
+          res = await axios.post(`${CHAT_API}:4000/authorChat`, {
             user_id: userData.id,
           });
         } else if (userData.roles.includes("subscriber")) {
-          res = await axios.post("http://192.168.50.60:4000/subscriberChat", {
+          res = await axios.post(`${CHAT_API}:4000/subscriberChat`, {
             user_id: userData.id,
           });
         }
         setChats(res.data.chats);
       } catch (err) {
-        console.error("couldnt get chats from server =>", err);
+        console.error(
+          "couldnt get chats from server =>",
+          err,
+          `${CHAT_API}:4000/subscriberChat`
+        );
       }
     }
     (userData !== null) & fetchChats(userData);
@@ -189,6 +294,7 @@ const UserProvider = ({ children }) => {
         logout,
         register,
         updateAvatar,
+        socket,
       }}
     >
       {children}

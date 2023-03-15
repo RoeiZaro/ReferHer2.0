@@ -24,6 +24,9 @@ export default function LandingPage() {
           </Text>
         </View>
         <View className="flex-column flex-1 bg-purple-300 justify-around items-center">
+          <View className="w-full ">
+
+            {/* <LottieView
           {/* <View className="w-full ">
           <LottieView
         autoPlay
