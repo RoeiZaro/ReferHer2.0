@@ -10,7 +10,7 @@ import ImageUpload from "../screens/components/ImageUpload";
 import PostsTab from "../screens/tabs/PostsTab";
 
 import JobSeeker from "../screens/tabs/JobSeeker";
-
+import TermsAndPrivacy from "../screens/tabs/TermsAndPrivacy";
 import { io } from "socket.io-client";
 
 
@@ -92,6 +92,16 @@ export default function MyTabs() {
         component={ProfileTab}
         options={{
           tabBarLabel: "Profile",
+          tabBarIcon: ({ color, size }) => (
+            <Icons.UserIcon name="account" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Terms & Privacy"
+        component={TermsAndPrivacy}
+        options={{
+          tabBarLabel: "Terms & Privacy",
           tabBarIcon: ({ color, size }) => (
             <Icons.UserIcon name="account" color={color} size={size} />
           ),

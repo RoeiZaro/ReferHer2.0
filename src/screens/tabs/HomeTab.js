@@ -242,7 +242,7 @@ All while ensuring that women are getting the credit for referring candidates to
     header: {
       // color:'#ff5c33',
       color: '#15172C',
-      fontSize:100,
+      fontSize:95,
     },
     second_header: {
       color: '#15172C',
