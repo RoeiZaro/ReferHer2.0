@@ -274,11 +274,10 @@ const UserProvider = ({ children }) => {
         }
         setChats(res.data.chats);
       } catch (err) {
-        console.error("couldnt get chats from server =>", err);
+        userData & console.error("couldnt get chats from server =>", err);
       }
     }
     fetchChats(userData);
-    console.log(chats);
   }, [userData]);
 
   return (
