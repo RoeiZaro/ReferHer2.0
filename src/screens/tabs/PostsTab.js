@@ -67,12 +67,14 @@ function PostsTab() {
       Alert.alert("Get Reffered", "Do you want to get in touch?", [
         {
           text: "Yes",
+          color: "blue",
           onPress: () => {
             setAuthorNumber(author);
           },
         },
         {
           text: "No",
+          color: "#FF0000",
         },
       ]);
     } catch (error) {
