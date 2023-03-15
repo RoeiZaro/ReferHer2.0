@@ -1,4 +1,4 @@
-import { View, Text, Pressable } from "react-native";
+import { View, Text, Pressable, Image } from "react-native";
 import React, { useContext, useLayoutEffect, useState } from "react";
 import * as Icons from "react-native-heroicons/solid";
 import { useNavigation } from "@react-navigation/native";
@@ -9,6 +9,8 @@ const ChatComponent = ({ chat }) => {
   const { userData } = useContext(UserContext);
   const navigation = useNavigation();
   const [lastMessages, setLastMessages] = useState({});
+  const userTalkedTo =
+    chat.subscriber.id == userData.id ? "author" : "subscriber";
 
   useLayoutEffect(() => {
     setLastMessages(chat.messages[chat.messages.length - 1]);
@@ -26,12 +28,19 @@ const ChatComponent = ({ chat }) => {
 
   return (
     <Pressable style={styles.cchat} onPress={handleNavigation}>
-      <Icons.UserCircleIcon
-        name="person-circle-outline"
-        size={45}
-        color="black"
-        style={styles.cavatar}
-      />
+      {chat[userTalkedTo].avatar ? (
+        <Image
+          className="w-14 h-14 rounded-full border-2  border-blue-300"
+          source={{ uri: chat[userTalkedTo].avatar }}
+        />
+      ) : (
+        <Icons.UserCircleIcon
+          name="person-circle-outline"
+          size={45}
+          color="black"
+          style={styles.cavatar}
+        />
+      )}
 
       <View style={styles.crightContainer}>
         <View>
@@ -47,7 +56,7 @@ const ChatComponent = ({ chat }) => {
         </View>
         <View>
           <Text style={styles.ctime}>
-            {lastMessages?.time ? lastMessages.time : "now"}
+            {lastMessages?.time ? lastMessages.time : ""}
           </Text>
         </View>
       </View>

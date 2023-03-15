@@ -6,57 +6,74 @@ import React, {
   useState,
 } from "react";
 import { View, TextInput, Text, FlatList, Pressable } from "react-native";
-import socket from "./Socket";
 import MessageComponent from "./MessageComponents";
 import { styles } from "./Styles";
 import { UserContext } from "../../../context/userContext";
+import axios from "axios";
+import { CHAT_API } from "@env";
+import moment from "moment";
 
 const Messaging = ({ route, navigation }) => {
-  const { userData, chats } = useContext(UserContext);
+  const { userData, chats, socket } = useContext(UserContext);
   const { name, _id } = route.params;
-  const [chatMessages, setChatMessages] = useState(
-    chats.filter((chat) => chat._id == _id)[0].messages
-  );
+  const currentChat = chats.filter((chat) => chat._id == _id)[0];
+  const [chatMessages, setChatMessages] = useState(currentChat.messages);
   const [message, setMessage] = useState("");
   const inputRef = useRef(null);
-
+  const flatlistRef = useRef(null);
   const userId = userData.id;
+  const destanitionId =
+    userData.id == currentChat.subscriber.id
+      ? currentChat.author.id
+      : currentChat.subscriber.id;
+
+  useEffect(() => {
+    socket.current.on("get-message", (msg) => {
+      setChatMessages((prev) => [...prev, msg]);
+      flatlistRef.current?.scrollToEnd();
+    });
+
+    return () => {
+      // socket.current.off("get-message");
+    };
+  }, []);
 
   const handleClear = () => {
     setMessage("");
     inputRef.current.clear();
+    flatlistRef.current?.scrollToEnd();
   };
 
-  const handleNewMessage = () => {
+  const handleNewMessage = async () => {
     handleClear();
     const time = new Date();
+    const msgData = {
+      destanition: destanitionId,
+      msg: { text: message, creator: userId, time: time, seen: "false" },
+    };
 
-    socket.to(_id).emit("newMessage", {
-      message,
-      user,
-      timestamp: time,
-    });
+    socket.current.emit("send-message", msgData);
 
     setChatMessages((prev) => [
       ...prev,
-      { text: message, creator: userId, time: time },
+      { text: message, creator: userId, time: time, seen: "false" },
     ]);
+
+    try {
+      const res = await axios.post(`${CHAT_API}:4000/addMessage`, {
+        chatId: _id,
+        message: { text: message, creator: userId, time: time, seen: "false" },
+      });
+      if (res.data.message == "Message added");
+    } catch (err) {
+      console.error("error while send msg to db", err);
+    }
   };
   useLayoutEffect(() => {
     navigation.setOptions({ title: name });
   }, []);
 
-  useEffect(() => {
-    socket.on("connection", () => console.log("connected"));
-    socket.on("recieve-message", (recieveMessage) => {
-      addMessage(recieveMessage);
-    });
-
-    return () => {
-      socket.off("connection");
-      socket.off("recieve-message");
-    };
-  }, []);
+  useEffect(() => {}, [message]);
 
   return (
     <View style={styles.messagingscreen}>
@@ -68,11 +85,12 @@ const Messaging = ({ route, navigation }) => {
       >
         {chatMessages[0] ? (
           <FlatList
+            ref={flatlistRef}
             data={chatMessages}
             renderItem={({ item }) => (
               <MessageComponent item={item} userId={userId} />
             )}
-            keyExtractor={(item) => item.time}
+            keyExtractor={(item) => `${item.time}${Math.random(10000)}`}
           />
         ) : (
           ""

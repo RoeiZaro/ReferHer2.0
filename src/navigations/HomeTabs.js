@@ -1,23 +1,34 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import * as Icons from "react-native-heroicons/solid";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { StatusBar } from "expo-status-bar";
-
 import { UserContext } from "../context/userContext";
-import { useContext } from "react";
-import { Text, View, Button } from "react-native";
+import { useContext, useEffect, useRef } from "react";
 
 import HomeTab from "../screens/tabs/HomeTab";
 import ProfileTab from "../screens/tabs/ProfileTab";
 import ChatNavigator from "./ChatNavigator";
 import ImageUpload from "../screens/components/ImageUpload";
 import PostsTab from "../screens/tabs/PostsTab";
+
 import JobSeeker from "../screens/tabs/JobSeeker";
+
+import { io } from "socket.io-client";
+
 
 const Tab = createBottomTabNavigator();
 
 export default function MyTabs() {
-  const { user } = useContext(UserContext);
+  const { userData, socket } = useContext(UserContext);
+
+  useEffect(() => {
+    socket.current = io("http://192.168.50.88:3000");
+    socket.current.emit("add-user", userData?.id ? userData?.id : -1);
+
+    return () => {
+      socket.current.emit("leave", userData?.id ? userData?.id : -1);
+      console.log("first");
+    };
+  }, []);
+
   return (
     <Tab.Navigator
       initialRouteName="Feed"

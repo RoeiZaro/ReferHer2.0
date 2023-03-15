@@ -13,7 +13,8 @@
 "email": "lola@gmail.com",
 "nickname": "lolaboon",
 "slug": "lolaboon",
-"password": "fuckit1234"
+"password": "fuckit1234",
+"role": 'author'
 }
 
 
@@ -112,3 +113,52 @@
     },
     "required": false
 }
+
+
+{
+    "_links": {
+        "collection": [[Object]],
+        "self": [[Object]]
+        }, 
+    "acf": [],
+    "avatar_urls": {
+        "24": "https://secure.gravatar.com/avatar/a38888d127b182e4270845f9fea0a767?s=24&d=mm&r=g", 
+        "48": "https://secure.gravatar.com/avatar/a38888d127b182e4270845f9fea0a767?s=48&d=mm&r=g", 
+        "96": "https://secure.gravatar.com/avatar/a38888d127b182e4270845f9fea0a767?s=96&d=mm&r=g"
+        }, 
+    "capabilities": {
+        "author": true, 
+        "delete_posts": true, 
+        "delete_published_posts": true, 
+        "edit_posts": true, 
+        "edit_published_posts": true, 
+        "level_0": true, 
+        "level_1": true, 
+        "level_2": true, 
+        "publish_posts": true, 
+        "read": true, 
+        "upload_files": true
+        }, 
+    "description": "", 
+    "email": "Maybe@gmail.com", 
+    "extra_capabilities": {
+        "author": true
+        }, 
+    "first_name": "Yes",
+    "id": 433, 
+    "last_name": "No", 
+    "link": "https://referher.co/author/yesno/", 
+    "locale": "en_US", 
+    "meta": {
+        "persisted_preferences": []
+        }, 
+    "name": "Yes No", 
+    "nickname": "YesNo", 
+    "registered_date": "2023-03-13T07:08:35+00:00", 
+    "roles": ["author"], 
+    "slug": "yesno", 
+    "url": "", 
+    "username": "YesNo"
+}
+
+

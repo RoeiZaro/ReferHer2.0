@@ -27,6 +27,8 @@ export default function LandingPage() {
           <View className="w-full ">
 
             {/* <LottieView
+          {/* <View className="w-full ">
+          <LottieView
         autoPlay
         style={{
           width: 200,
@@ -35,8 +37,8 @@ export default function LandingPage() {
         }}
       
         source={require('../../../assets/homepage.json')}
-      /> */}
-          </View>
+      />
+          </View> */}
           <View className="flex-row justify-around ">
             <TouchableOpacity
               className=" bg-purple-800 w-24 h-14  border-2 rounded-xl border-white  items-center justify-center shadow-xl"

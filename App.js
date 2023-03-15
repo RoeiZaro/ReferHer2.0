@@ -5,7 +5,6 @@ import UserProvider from "./src/context/userContext";
 import SplashScreen from "./src/screens/auth/splashScreen";
 // import { useFonts } from 'expo-font';
 
-
 export default function App() {
   const sleep = (ms) => {
     return new Promise((resolve) => setTimeout(resolve, ms));
@@ -33,7 +32,5 @@ export default function App() {
         </UserProvider>
       )}
     </NavigationContainer>
-
-
   );
 }
